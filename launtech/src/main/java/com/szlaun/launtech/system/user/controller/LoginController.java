@@ -1,4 +1,4 @@
-package com.szlaun.launtech.controller;
+package com.szlaun.launtech.system.user.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
@@ -6,8 +6,8 @@ import com.sap.conn.jco.JCoDestination;
 import com.sap.conn.jco.JCoFunction;
 import com.sap.conn.jco.JCoStructure;
 import com.sap.conn.jco.JCoTable;
-import com.szlaun.launtech.service.UserService;
 import com.szlaun.launtech.system.user.dto.User;
+import com.szlaun.launtech.system.user.service.UserService;
 import com.szlaun.launtech.utils.SAPConnectionPool;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,7 +23,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.Base64;
 import java.util.List;
 import java.util.Map;
 

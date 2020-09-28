@@ -1,4 +1,4 @@
-package com.szlaun.launtech.model;
+package com.szlaun.launtech.system.sap.dto;
 
 import com.sap.conn.jco.ext.DestinationDataEventListener;
 import com.sap.conn.jco.ext.DestinationDataProvider;
