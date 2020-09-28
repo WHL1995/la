@@ -8,8 +8,8 @@ import java.io.*;
  * @Date 2020/9/28 16:11
  * @Version V1.0
  **/
-public final class Base64Utils {
-    private Base64Utils() {
+public final class Base64Util {
+    private Base64Util() {
     }
 
     /**
