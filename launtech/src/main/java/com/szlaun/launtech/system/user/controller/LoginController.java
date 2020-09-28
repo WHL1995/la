@@ -8,7 +8,7 @@ import com.sap.conn.jco.JCoStructure;
 import com.sap.conn.jco.JCoTable;
 import com.szlaun.launtech.system.user.dto.User;
 import com.szlaun.launtech.system.user.service.UserService;
-import com.szlaun.launtech.utils.SAPConnectionPool;
+import com.szlaun.launtech.system.sap.service.SAPConnectionPool;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

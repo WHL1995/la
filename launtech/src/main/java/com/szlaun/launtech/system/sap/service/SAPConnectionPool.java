@@ -1,11 +1,11 @@
-package com.szlaun.launtech.utils;
+package com.szlaun.launtech.system.sap.service;
 
 import com.sap.conn.jco.JCoDestination;
 import com.sap.conn.jco.JCoDestinationManager;
 import com.sap.conn.jco.JCoException;
 import com.sap.conn.jco.ext.DestinationDataProvider;
 import com.sap.conn.jco.ext.Environment;
-import com.szlaun.launtech.model.CustomDestinationDataProvider;
+import com.szlaun.launtech.system.sap.dto.CustomDestinationDataProvider;
 import org.springframework.stereotype.Service;
 
 import java.io.FileInputStream;
