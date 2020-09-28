@@ -1,6 +1,7 @@
 package com.szlaun.launtech.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.sap.conn.jco.JCoDestination;
 import com.sap.conn.jco.JCoFunction;
 import com.sap.conn.jco.JCoStructure;
@@ -22,6 +23,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Base64;
 import java.util.List;
 import java.util.Map;
 
@@ -50,6 +52,22 @@ public class LoginController {
     @GetMapping({"/"})
     public String getLogin() {
         return "login";
+    }
+
+    @PostMapping({"/login"})
+    public JSONObject login(HttpServletRequest request) {
+        String account = request.getParameter("account");
+        String password = request.getParameter("password");
+        JSONObject result = new JSONObject();
+//        Base64.
+        if("二狗".equals(account)&&"123456".equals(password)){
+            result.put("msg","登录成功");
+            result.put("status",true);
+        }else{
+            result.put("msg","登录失败,账户或密码错误！");
+            result.put("status",false);
+        }
+        return result;
     }
 
     @PostMapping({"/login"})
