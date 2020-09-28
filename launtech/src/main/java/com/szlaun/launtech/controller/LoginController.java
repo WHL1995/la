@@ -6,7 +6,7 @@ import com.sap.conn.jco.JCoFunction;
 import com.sap.conn.jco.JCoStructure;
 import com.sap.conn.jco.JCoTable;
 import com.szlaun.launtech.service.UserService;
-import com.szlaun.launtech.model.User;
+import com.szlaun.launtech.system.user.dto.User;
 import com.szlaun.launtech.utils.SAPConnectionPool;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

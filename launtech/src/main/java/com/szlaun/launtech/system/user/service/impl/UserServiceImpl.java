@@ -1,4 +1,4 @@
-package com.szlaun.launtech.service.impl;
+package com.szlaun.launtech.system.user.service.impl;
 
 
 import com.szlaun.launtech.service.UserService;

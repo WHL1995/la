@@ -1,11 +1,13 @@
-package com.szlaun.launtech.model;
+package com.szlaun.launtech.system.dict.dto;
 
 import java.util.Date;
 
-public class Role {
+public class DictType {
     private String id;
 
     private String name;
+
+    private String remark;
 
     private Date createTime;
 
@@ -29,6 +31,14 @@ public class Role {
 
     public void setName(String name) {
         this.name = name == null ? null : name.trim();
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark == null ? null : remark.trim();
     }
 
     public Date getCreateTime() {

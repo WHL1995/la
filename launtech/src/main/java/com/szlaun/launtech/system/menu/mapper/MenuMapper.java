@@ -1,6 +1,6 @@
-package com.szlaun.launtech.mapper;
+package com.szlaun.launtech.system.menu.mapper;
 
-import com.szlaun.launtech.model.Menu;
+import com.szlaun.launtech.system.menu.dto.Menu;
 
 public interface MenuMapper {
     int deleteByPrimaryKey(String id);

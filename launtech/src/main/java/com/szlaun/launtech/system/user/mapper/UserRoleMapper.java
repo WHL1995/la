@@ -1,6 +1,6 @@
-package com.szlaun.launtech.mapper;
+package com.szlaun.launtech.system.user.mapper;
 
-import com.szlaun.launtech.model.UserRoleKey;
+import com.szlaun.launtech.system.user.dto.UserRoleKey;
 
 public interface UserRoleMapper {
     int deleteByPrimaryKey(UserRoleKey key);

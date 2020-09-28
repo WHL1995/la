@@ -1,4 +1,4 @@
-package com.szlaun.launtech.service;
+package com.szlaun.launtech.system.user.service;
 
 import com.szlaun.launtech.system.user.dto.User;
 
@@ -10,7 +10,7 @@ public interface UserService {
 
     User selectById(String id);
 
-    int verifyPermission(String userId,List<String> permissStrs);
+    int verifyPermission(String userId, List<String> permissStrs);
 
     List<User> selectAll();
 }

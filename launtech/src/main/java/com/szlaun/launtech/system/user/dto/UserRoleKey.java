@@ -1,4 +1,4 @@
-package com.szlaun.launtech.model;
+package com.szlaun.launtech.system.user.dto;
 
 public class UserRoleKey {
     private String userId;

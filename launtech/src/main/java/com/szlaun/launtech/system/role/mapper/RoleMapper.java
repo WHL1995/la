@@ -1,6 +1,6 @@
-package com.szlaun.launtech.mapper;
+package com.szlaun.launtech.system.role.mapper;
 
-import com.szlaun.launtech.model.Role;
+import com.szlaun.launtech.system.role.dto.Role;
 
 public interface RoleMapper {
     int deleteByPrimaryKey(String id);
