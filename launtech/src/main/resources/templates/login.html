@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登录</title>
+    <script src="js/vue.js"></script>
+    <style>
+        #app{ width:499px; height:169px; margin:10px auto 0 auto; background:url(images/txtbg404.png) no-repeat;}
+    </style>
+</head>
+<body>
+    <div id="app">
+        <h1 v-text="title"></h1>
+        <form action="/login" method="post">
+            用户名：<input name="name" v-model="user.name" type="text">
+            密码：<input name="password" v-model="user.password" type="password">
+            <p v-text="user.msg"></p>
+            <input type="submit" value="提交">
+        </form>
+    </div>
+    <script>
+        var var1 = '[[${msg}]]';
+        var var2 = '[[${name}]]';
+        var var3 = '[[${password}]]';
+        var user = {
+            msg: var1 ? var1 : "",
+            name: var2 ? var2 : "二狗",
+            password: var3 ? var3 : "123456"
+        }
+        console.log(user.msg);
+        var app = new Vue({
+            el:"#app",
+            data:{
+                title:"登录",
+                user:user
+            }
+        });
+    </script>
+</body>
+</html>

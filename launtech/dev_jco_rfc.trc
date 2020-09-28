@@ -1,0 +1,24 @@
+
+**** Error file opened at 20200923 164959 China Standard Time Rel 3.0.11 (2014-04-15) [721.619]
+Error:  >Wed Sep 23 16:49:59,858<    RfcException:
+    message: Connect to SAP gateway failed
+Connection parameters: TYPE=A DEST=SAP_CONN ASHOST=127.0.0.1 SYSNR=00 PCS=1
+
+LOCATION    CPIC (TCP/IP) on local host with Unicode
+ERROR       partner '127.0.0.1:3300' not reached
+TIME        Wed Sep 23 16:49:59 2020
+RELEASE     721
+COMPONENT   NI (network interface)
+VERSION     40
+RC          -10
+MODULE      nixxi.cpp
+LINE        3283
+DETAIL      NiPConnect2: 127.0.0.1:3300
+SYSTEM CALL connect
+ERRNO       10061
+ERRNO TEXT  WSAECONNREFUSED: Connection refused
+COUNTER     2
+
+    return code: RFC_FAILURE (1)
+    error group: 102
+    key: RFC_ERROR_COMMUNICATION
