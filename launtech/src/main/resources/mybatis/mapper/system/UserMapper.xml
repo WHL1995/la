@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.szlaun.launtech.mapper.UserMapper" >
-  <resultMap id="BaseResultMap" type="com.szlaun.launtech.model.User" >
+<mapper namespace="com.szlaun.launtech.system.user.mapper.UserMapper" >
+  <resultMap id="BaseResultMap" type="com.szlaun.launtech.system.user.dto.User" >
     <id column="id" property="id" jdbcType="VARCHAR" />
     <result column="name" property="name" jdbcType="VARCHAR" />
     <result column="account" property="account" jdbcType="VARCHAR" />
@@ -39,7 +39,7 @@
     delete from sys_user
     where id = #{id,jdbcType=VARCHAR}
   </delete>
-  <insert id="insert" parameterType="com.szlaun.launtech.model.User" >
+  <insert id="insert" parameterType="com.szlaun.launtech.system.user.dto.User" >
     insert into sys_user (id, name, account, 
       password, email, status, 
       create_time, update_time, create_user, 
@@ -49,7 +49,7 @@
       #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{createUser,jdbcType=VARCHAR}, 
       #{updateUser,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.szlaun.launtech.model.User" >
+  <insert id="insertSelective" parameterType="com.szlaun.launtech.system.user.dto.User" >
     insert into sys_user
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -116,7 +116,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.szlaun.launtech.model.User" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.szlaun.launtech.system.user.dto.User" >
     update sys_user
     <set >
       <if test="name != null" >
@@ -149,7 +149,7 @@
     </set>
     where id = #{id,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.szlaun.launtech.model.User" >
+  <update id="updateByPrimaryKey" parameterType="com.szlaun.launtech.system.user.dto.User" >
     update sys_user
     set name = #{name,jdbcType=VARCHAR},
       account = #{account,jdbcType=VARCHAR},

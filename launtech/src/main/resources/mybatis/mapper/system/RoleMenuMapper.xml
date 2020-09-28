@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.szlaun.launtech.mapper.RoleMenuMapper" >
-  <resultMap id="BaseResultMap" type="com.szlaun.launtech.model.RoleMenuKey" >
+<mapper namespace="com.szlaun.launtech.system.role.mapper.RoleMenuMapper" >
+  <resultMap id="BaseResultMap" type="com.szlaun.launtech.system.role.dto.RoleMenuKey" >
     <id column="role_id" property="roleId" jdbcType="VARCHAR" />
     <id column="menu_id" property="menuId" jdbcType="VARCHAR" />
   </resultMap>
-  <delete id="deleteByPrimaryKey" parameterType="com.szlaun.launtech.model.RoleMenuKey" >
+  <delete id="deleteByPrimaryKey" parameterType="com.szlaun.launtech.system.role.dto.RoleMenuKey" >
     delete from sys_role_menu
     where role_id = #{roleId,jdbcType=VARCHAR}
       and menu_id = #{menuId,jdbcType=VARCHAR}
   </delete>
-  <insert id="insert" parameterType="com.szlaun.launtech.model.RoleMenuKey" >
+  <insert id="insert" parameterType="com.szlaun.launtech.system.role.dto.RoleMenuKey" >
     insert into sys_role_menu (role_id, menu_id)
     values (#{roleId,jdbcType=VARCHAR}, #{menuId,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.szlaun.launtech.model.RoleMenuKey" >
+  <insert id="insertSelective" parameterType="com.szlaun.launtech.system.role.dto.RoleMenuKey" >
     insert into sys_role_menu
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="roleId != null" >

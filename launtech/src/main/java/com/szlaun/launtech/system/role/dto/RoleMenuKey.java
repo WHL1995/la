@@ -1,4 +1,4 @@
-package com.szlaun.launtech.model;
+package com.szlaun.launtech.system.role.dto;
 
 public class RoleMenuKey {
     private String roleId;

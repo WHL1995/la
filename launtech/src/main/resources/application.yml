@@ -5,7 +5,7 @@ mybatis:
   # mybatis配置文件所在路径
   config-location: classpath:mybatis/mybatis.cfg.xml
   # 所有Model别名类所在包
-  type-aliases-package: com.szlaun.launtech.model
+  type-aliases-package: com.szlaun.launtech.*.*.dto
   # mapper映射文件
   mapper-locations: classpath:mybatis/mapper/**/*.xml
 

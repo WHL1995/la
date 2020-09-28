@@ -1,4 +1,4 @@
-package com.szlaun.launtech.model;
+package com.szlaun.launtech.system.dict.dto;
 
 import java.util.Date;
 

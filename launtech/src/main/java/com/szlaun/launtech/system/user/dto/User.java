@@ -1,15 +1,19 @@
-package com.szlaun.launtech.model;
+package com.szlaun.launtech.system.user.dto;
 
 import java.util.Date;
 
-public class Menu {
+public class User {
     private String id;
 
-    private String url;
+    private String name;
 
-    private Integer type;
+    private String account;
 
-    private String remark;
+    private String password;
+
+    private String email;
+
+    private Integer status;
 
     private Date createTime;
 
@@ -27,28 +31,44 @@ public class Menu {
         this.id = id == null ? null : id.trim();
     }
 
-    public String getUrl() {
-        return url;
+    public String getName() {
+        return name;
     }
 
-    public void setUrl(String url) {
-        this.url = url == null ? null : url.trim();
+    public void setName(String name) {
+        this.name = name == null ? null : name.trim();
     }
 
-    public Integer getType() {
-        return type;
+    public String getAccount() {
+        return account;
     }
 
-    public void setType(Integer type) {
-        this.type = type;
+    public void setAccount(String account) {
+        this.account = account == null ? null : account.trim();
     }
 
-    public String getRemark() {
-        return remark;
+    public String getPassword() {
+        return password;
     }
 
-    public void setRemark(String remark) {
-        this.remark = remark == null ? null : remark.trim();
+    public void setPassword(String password) {
+        this.password = password == null ? null : password.trim();
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email == null ? null : email.trim();
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 
     public Date getCreateTime() {

@@ -1,6 +1,6 @@
-package com.szlaun.launtech.mapper;
+package com.szlaun.launtech.system.user.mapper;
 
-import com.szlaun.launtech.model.User;
+import com.szlaun.launtech.system.user.dto.User;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;

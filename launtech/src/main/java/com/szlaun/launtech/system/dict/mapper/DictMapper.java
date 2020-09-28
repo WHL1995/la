@@ -1,6 +1,6 @@
-package com.szlaun.launtech.mapper;
+package com.szlaun.launtech.system.dict.mapper;
 
-import com.szlaun.launtech.model.Dict;
+import com.szlaun.launtech.system.dict.dto.Dict;
 
 public interface DictMapper {
     int deleteByPrimaryKey(String id);

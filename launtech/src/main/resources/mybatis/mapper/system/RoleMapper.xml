@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.szlaun.launtech.mapper.RoleMapper" >
-  <resultMap id="BaseResultMap" type="com.szlaun.launtech.model.Role" >
+<mapper namespace="com.szlaun.launtech.system.role.mapper.RoleMapper" >
+  <resultMap id="BaseResultMap" type="com.szlaun.launtech.system.role.dto.Role" >
     <id column="id" property="id" jdbcType="VARCHAR" />
     <result column="name" property="name" jdbcType="VARCHAR" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
@@ -22,7 +22,7 @@
     delete from sys_role
     where id = #{id,jdbcType=VARCHAR}
   </delete>
-  <insert id="insert" parameterType="com.szlaun.launtech.model.Role" >
+  <insert id="insert" parameterType="com.szlaun.launtech.system.role.dto.Role" >
     insert into sys_role (id, name, create_time, 
       update_time, create_user, update_user
       )
@@ -30,7 +30,7 @@
       #{updateTime,jdbcType=TIMESTAMP}, #{createUser,jdbcType=VARCHAR}, #{updateUser,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.szlaun.launtech.model.Role" >
+  <insert id="insertSelective" parameterType="com.szlaun.launtech.system.role.dto.Role" >
     insert into sys_role
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -73,7 +73,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.szlaun.launtech.model.Role" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.szlaun.launtech.system.role.dto.Role" >
     update sys_role
     <set >
       <if test="name != null" >
@@ -94,7 +94,7 @@
     </set>
     where id = #{id,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.szlaun.launtech.model.Role" >
+  <update id="updateByPrimaryKey" parameterType="com.szlaun.launtech.system.role.dto.Role" >
     update sys_role
     set name = #{name,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=TIMESTAMP},
