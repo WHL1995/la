@@ -53,6 +53,8 @@ public class DateUtils extends org.apache.commons.lang.time.DateUtils {
     public static String DATE_FORMAT_DATEONLY = "yyyy-MM-dd"; // 年/月/日
     public static String DATE_FORMAT_DATETIME = "yyyy-MM-dd HH:mm:ss"; // 年/月/日
     public static SimpleDateFormat sdfDateTime = new SimpleDateFormat(DateUtils.DATE_FORMAT_DATETIME);
+
+    public static String YYYY_MM_DD_HH_MM_SS = "yyyy-MM-dd HH:mm:ss";
     // Global SimpleDateFormat object
     public static SimpleDateFormat sdfDateOnly = new SimpleDateFormat(DateUtils.DATE_FORMAT_DATEONLY);
     public static final SimpleDateFormat SHORTDATEFORMAT = new SimpleDateFormat("yyyyMMdd");
@@ -1689,6 +1691,11 @@ public class DateUtils extends org.apache.commons.lang.time.DateUtils {
         }
 
         return Integer.parseInt(DateUtils.formatDate(date,"yyyyMM"));
+    }
+
+    //新增方法
+    public static final String parseDateToStr(final String format, final Date date) {
+        return (new SimpleDateFormat(format)).format(date);
     }
 }
 
