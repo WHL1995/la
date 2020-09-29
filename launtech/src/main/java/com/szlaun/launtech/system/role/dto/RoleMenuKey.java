@@ -1,6 +1,8 @@
 package com.szlaun.launtech.system.role.dto;
 
-public class RoleMenuKey {
+import com.szlaun.launtech.utils.BaseEntity;
+
+public class RoleMenuKey extends BaseEntity {
     private String roleId;
 
     private String menuId;
