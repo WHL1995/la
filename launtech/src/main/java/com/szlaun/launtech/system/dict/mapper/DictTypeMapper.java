@@ -14,4 +14,6 @@ public interface DictTypeMapper {
     int updateByPrimaryKeySelective(DictType record);
 
     int updateByPrimaryKey(DictType record);
+
+    int deleteByIds(String[] ids);
 }
