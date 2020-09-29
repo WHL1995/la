@@ -42,13 +42,8 @@ public class PropertyUtils {
         if (PropertyAddFlagEnum.INSERT.equals(methodName)) {
             entity.setCreateDate(now);
             entity.setCreateTime(date);
-            entity.setUpdateDate(now);
-            entity.setUpdateTime(date);
             entity.setCreateUserId(operatorId);
             entity.setCreateUserName(operatorName);
-            entity.setUpdateUserId(operatorId);
-            entity.setUpdateUserName(operatorName);
-
         } else if (PropertyAddFlagEnum.UPDATE.equals(methodName)) {
             entity.setUpdateDate(now);
             entity.setUpdateTime(date);
