@@ -1,20 +1,23 @@
 package com.szlaun.launtech.system.user.controller;
 
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.sap.conn.jco.JCoDestination;
 import com.sap.conn.jco.JCoFunction;
 import com.sap.conn.jco.JCoStructure;
 import com.sap.conn.jco.JCoTable;
+import com.szlaun.launtech.anno.Authority;
+import com.szlaun.launtech.system.sap.service.SAPConnectionPool;
 import com.szlaun.launtech.system.user.dto.User;
 import com.szlaun.launtech.system.user.service.UserService;
-import com.szlaun.launtech.system.sap.service.SAPConnectionPool;
+import com.szlaun.launtech.utils.Constant;
+import com.szlaun.launtech.utils.ResultMsg;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.client.RestTemplate;
+import org.thymeleaf.util.StringUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.BufferedReader;
@@ -23,8 +26,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.List;
-import java.util.Map;
 
 /**
  * @Description
@@ -38,52 +39,7 @@ public class LoginController {
     @Autowired
     private UserService userService;
 
-    @Autowired
-    private RestTemplate restTemplate;
-
-    @ResponseBody
-    @GetMapping("/getUsers")
-    public String getUsers() {
-        List<User> list = userService.selectAll();
-        return JSON.toJSONString(list);
-    }
-
-    @GetMapping({"/"})
-    public String getLogin() {
-        return "login";
-    }
-
-    @PostMapping({"/login"})
-    public JSONObject login(HttpServletRequest request) {
-        String account = request.getParameter("account");
-        String password = request.getParameter("password");
-        JSONObject result = new JSONObject();
-//        Base64.
-        if("二狗".equals(account)&&"123456".equals(password)){
-            result.put("msg","登录成功");
-            result.put("status",true);
-        }else{
-            result.put("msg","登录失败,账户或密码错误！");
-            result.put("status",false);
-        }
-        return result;
-    }
-
-    @PostMapping({"/login"})
-    public String getIndex(HttpServletRequest request, Map<String,String> map) {
-        String name = request.getParameter("name");
-        String password = request.getParameter("password");
-        if("二狗".equals(name)&&"123456".equals(password)){
-            map.put("msg","账户为二狗子，不许登录。");
-            map.put("name",name);
-            map.put("password",password);
-            return "login";
-        }
-        System.out.println(name);
-        System.out.println(password);
-        return "index";
-    }
-
+    @Authority("aaaa")
     @ResponseBody
     @GetMapping("/getIndex2")
     public String getIndex2() {
@@ -149,10 +105,11 @@ public class LoginController {
         }
     }
 
+    @Authority("aaaa")
     @ResponseBody
     @GetMapping("/getIndex3")
     public String getIndex3() {
-        try{
+        try {
             JCoDestination destination = SAPConnectionPool.getSAPDestination();//获取连接
             //返回一个JCoFunction初始参数的传递函数名。获取接口方法
             JCoFunction function = destination.getRepository().getFunction("Function_NAME");
@@ -182,9 +139,57 @@ public class LoginController {
                 System.out.println(returnStructure.getString("Param1"));
                 System.out.println(returnStructure.getString("Param2"));
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return "";
     }
+
+    /**
+     * 登录验证
+     *
+     * @param request
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("/login")
+    public ResultMsg login(HttpServletRequest request) {
+        String account = request.getParameter("account");
+        String password = request.getParameter("password");
+        if (StringUtils.isEmpty(account) || StringUtils.isEmpty(password)) {
+            return ResultMsg.getError("登录失败,账户或密码不能为空！");
+        } else {
+            User user = userService.verifyAccount(account, password);
+            if (user != null) {
+                request.getSession().setAttribute(Constant.SESSION_ACCOUNT_FLAGE, user);
+                return ResultMsg.getSuccess("登录成功！");
+            } else {
+                return ResultMsg.getError("登录失败,账户或密码错误！");
+            }
+        }
+    }
+
+
+    /**
+     * 修改密码
+     *
+     * @param request
+     * @return
+     */
+    @ResponseBody
+    @Authority({"user:update", "user:select"})
+    @RequestMapping("/updatePassword")
+    public ResultMsg updatePassword(HttpServletRequest request, @RequestParam(required = true) String password) {
+        User user = (User) request.getSession().getAttribute(Constant.SESSION_ACCOUNT_FLAGE);
+        if (!StringUtils.isEmpty(password) && user != null) {
+            user.setPassword(password);
+            int result = userService.updateByPrimaryKeySelective(user);
+            if(result > 0){
+                return ResultMsg.getSuccess("密码修改成功！");
+            }
+            return ResultMsg.getError("修改密码失败！");
+        }
+        return ResultMsg.getError("修改密码失败！");
+    }
+
 }

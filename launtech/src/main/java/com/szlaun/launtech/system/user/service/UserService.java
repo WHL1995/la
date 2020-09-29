@@ -10,7 +10,11 @@ public interface UserService {
 
     User selectById(String id);
 
+    User verifyAccount(String account,String password);
+
     int verifyPermission(String userId, List<String> permissStrs);
 
     List<User> selectAll();
+
+    int updateByPrimaryKeySelective(User user);
 }

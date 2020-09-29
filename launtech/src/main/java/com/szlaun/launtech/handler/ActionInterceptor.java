@@ -2,8 +2,9 @@ package com.szlaun.launtech.handler;
 
 import com.alibaba.fastjson.JSONObject;
 import com.szlaun.launtech.anno.Authority;
-import com.szlaun.launtech.service.UserService;
 import com.szlaun.launtech.system.user.dto.User;
+import com.szlaun.launtech.system.user.service.UserService;
+import com.szlaun.launtech.utils.Constant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.method.HandlerMethod;
@@ -42,7 +43,7 @@ public class ActionInterceptor implements HandlerInterceptor {
         if (authority != null) {
             /** 取出方法所需权限 */
             String[] values = authority.value();
-            User user = (User) request.getSession().getAttribute("user");
+            User user = (User) request.getSession().getAttribute(Constant.SESSION_ACCOUNT_FLAGE);
             if(user != null){
                 int result = userService.verifyPermission(user.getId(),Arrays.asList(values));
                 /* 必须满足所有的权限 */

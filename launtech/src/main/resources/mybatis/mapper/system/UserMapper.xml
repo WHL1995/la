@@ -14,7 +14,7 @@
     <result column="update_user" property="updateUser" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, name, account, password, email, status, create_time, update_time, create_user, 
+    id, name, account, email, status, create_time, update_time, create_user,
     update_user
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
@@ -27,6 +27,12 @@
     select
     <include refid="Base_Column_List" />
     from sys_user
+  </select>
+  <select id="verifyAccount" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from sys_user
+    where account = #{account} and password = #{password}
   </select>
   <select id="verifyPermission" resultType="int">
     select count(0) from sys_role_menu srm LEFT JOIN sys_menu sm on sm.id=srm.menu_id

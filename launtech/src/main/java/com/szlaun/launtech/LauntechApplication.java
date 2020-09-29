@@ -7,7 +7,7 @@ import org.springframework.context.annotation.ComponentScan;
 
 
 @MapperScan("com.szlaun.launtech.*.*.mapper")
-@ComponentScan("com.szlaun.launtech.*.*.service")
+@ComponentScan({"com.szlaun.launtech.*"})
 @SpringBootApplication
 public class LauntechApplication {
 

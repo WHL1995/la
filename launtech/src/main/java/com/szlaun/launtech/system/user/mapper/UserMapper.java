@@ -16,6 +16,8 @@ public interface UserMapper {
 
     List<User> selectAll();
 
+    User verifyAccount(@Param("account") String account,@Param("password") String password);
+
     int verifyPermission(@Param("userId") String userId, @Param("permissStrs") List<String> permissStrs);
 
     int updateByPrimaryKeySelective(User record);
