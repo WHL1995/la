@@ -2,8 +2,9 @@ package com.szlaun.launtech.handler;
 
 import com.alibaba.fastjson.JSONObject;
 import com.szlaun.launtech.anno.Authority;
-import com.szlaun.launtech.service.UserService;
+
 import com.szlaun.launtech.system.user.dto.User;
+import com.szlaun.launtech.system.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.method.HandlerMethod;
