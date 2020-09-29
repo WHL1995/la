@@ -1,17 +1,12 @@
 package com.szlaun.launtech.system.user.service.impl;
 
 
-<<<<<<< HEAD
+import com.szlaun.launtech.enums.PropertyAddFlagEnum;
 import com.szlaun.launtech.system.user.dto.User;
 import com.szlaun.launtech.system.user.mapper.UserMapper;
 import com.szlaun.launtech.system.user.service.UserService;
 import com.szlaun.launtech.utils.Base64Util;
-=======
-
-import com.szlaun.launtech.system.user.dto.User;
-import com.szlaun.launtech.system.user.mapper.UserMapper;
-import com.szlaun.launtech.system.user.service.UserService;
->>>>>>> d0e42fc073a40b2fca1ad19b0479548bb75290e4
+import com.szlaun.launtech.utils.PropertyUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -53,8 +48,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public int updateByPrimaryKeySelective(User user) {
         user.setPassword(Base64Util.encode(user.getPassword()));
-        user.setUpdateTime(new Date());
-        user.setUpdateUser(user.getId());
+        PropertyUtils.addDefaultProperty(user, PropertyAddFlagEnum.UPDATE,user.getId());
         return userMapper.updateByPrimaryKeySelective(user);
     }
 }

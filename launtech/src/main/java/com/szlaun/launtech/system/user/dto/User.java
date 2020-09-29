@@ -1,8 +1,10 @@
 package com.szlaun.launtech.system.user.dto;
 
+import com.szlaun.launtech.utils.BaseEntity;
+
 import java.util.Date;
 
-public class User {
+public class User extends BaseEntity{
     private String id;
 
     private String name;

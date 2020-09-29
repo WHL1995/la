@@ -27,15 +27,28 @@ public class BaseEntity implements Serializable {
     @JsonFormat(
             pattern = "yyyy-MM-dd HH:mm:ss"
     )
-    private String updateDate;
-    private String createUserId;
-    private String createUserName;
-    private String updateUserId;
-    private String updateUserName;
+    private String createUser;
+    private String updateUser;
     private String remark;
     private Map<String, Object> params;
 
     public BaseEntity() {
+    }
+
+    public String getCreateUser() {
+        return createUser;
+    }
+
+    public void setCreateUser(String createUser) {
+        this.createUser = createUser;
+    }
+
+    public String getUpdateUser() {
+        return updateUser;
+    }
+
+    public void setUpdateUser(String updateUser) {
+        this.updateUser = updateUser;
     }
 
     public String getSearchValue() {
@@ -100,46 +113,6 @@ public class BaseEntity implements Serializable {
 
     public void setCreateDate(String createDate) {
         this.createDate = createDate;
-    }
-
-    public String getUpdateDate() {
-        return this.updateDate;
-    }
-
-    public void setUpdateDate(String updateDate) {
-        this.updateDate = updateDate;
-    }
-
-    public String getCreateUserId() {
-        return this.createUserId;
-    }
-
-    public void setCreateUserId(String createUserId) {
-        this.createUserId = createUserId;
-    }
-
-    public String getCreateUserName() {
-        return this.createUserName;
-    }
-
-    public void setCreateUserName(String createUserName) {
-        this.createUserName = createUserName;
-    }
-
-    public String getUpdateUserId() {
-        return this.updateUserId;
-    }
-
-    public void setUpdateUserId(String updateUserId) {
-        this.updateUserId = updateUserId;
-    }
-
-    public String getUpdateUserName() {
-        return this.updateUserName;
-    }
-
-    public void setUpdateUserName(String updateUserName) {
-        this.updateUserName = updateUserName;
     }
 
     public String getId() {

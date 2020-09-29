@@ -34,21 +34,17 @@ public class PropertyUtils {
      * @param entity       添加实体
      * @param methodName   添加的方式  （主要是添加和修改两种）
      * @param operatorId   操作员ID
-     * @param operatorName 操作员真实姓名
      */
-    public static void addDefaultProperty(BaseEntity entity, PropertyAddFlagEnum methodName, String operatorId, String operatorName) {
+    public static void addDefaultProperty(BaseEntity entity, PropertyAddFlagEnum methodName, String operatorId) {
         Date date = new Date();
         String now = DateUtils.parseDateToStr(DateUtils.YYYY_MM_DD_HH_MM_SS, date);
         if (PropertyAddFlagEnum.INSERT.equals(methodName)) {
             entity.setCreateDate(now);
             entity.setCreateTime(date);
-            entity.setCreateUserId(operatorId);
-            entity.setCreateUserName(operatorName);
+            entity.setCreateUser(operatorId);
         } else if (PropertyAddFlagEnum.UPDATE.equals(methodName)) {
-            entity.setUpdateDate(now);
             entity.setUpdateTime(date);
-            entity.setUpdateUserId(operatorId);
-            entity.setUpdateUserName(operatorName);
+            entity.setUpdateUser(operatorId);
         }
     }
 }
