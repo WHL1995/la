@@ -11,7 +11,15 @@ public class ResultMsg {
 
     private String msg;
 
-    private boolean status;
+    private int code;
+
+    public int getCode() {
+        return code;
+    }
+
+    public void setCode(int code) {
+        this.code = code;
+    }
 
     public Object getResult() {
         return result;
@@ -29,34 +37,34 @@ public class ResultMsg {
         this.msg = msg;
     }
 
-    public boolean isStatus() {
-        return status;
-    }
-
-    public void setStatus(boolean status) {
-        this.status = status;
-    }
-
-    public ResultMsg(String msg, boolean status){
+    public ResultMsg(String msg, int code) {
         this.msg = msg;
-        this.status = status;
+        this.code = code;
     }
 
-    public ResultMsg(String msg, boolean status,Object result){
+    public ResultMsg(String msg, int code, Object result) {
         this.msg = msg;
-        this.status = status;
+        this.code = code;
         this.result = result;
     }
 
-    public static ResultMsg getSuccess(String msg,Object result){
-        return new ResultMsg(msg,true,result);
+    public static ResultMsg getSuccess(String msg, Object result) {
+        return new ResultMsg(msg, 200, result);
     }
 
-    public static ResultMsg getSuccess(String msg){
-        return new ResultMsg(msg,true);
+    public static ResultMsg getSuccess(String msg) {
+        return new ResultMsg(msg, 200);
     }
 
-    public static ResultMsg getError(String msg){
-        return new ResultMsg(msg,false);
+    public static ResultMsg getError(String msg) {
+        return new ResultMsg(msg, 500);
+    }
+
+    public static ResultMsg getSuccess() {
+        return new ResultMsg("操作成功", 200);
+    }
+
+    public static ResultMsg getError() {
+        return new ResultMsg("操作失败", 500);
     }
 }

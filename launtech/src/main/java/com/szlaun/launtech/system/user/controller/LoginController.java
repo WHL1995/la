@@ -6,10 +6,12 @@ import com.sap.conn.jco.JCoFunction;
 import com.sap.conn.jco.JCoStructure;
 import com.sap.conn.jco.JCoTable;
 import com.szlaun.launtech.anno.Authority;
+import com.szlaun.launtech.enums.PropertyAddFlagEnum;
 import com.szlaun.launtech.system.sap.service.SAPConnectionPool;
 import com.szlaun.launtech.system.user.dto.User;
 import com.szlaun.launtech.system.user.service.UserService;
 import com.szlaun.launtech.utils.Constant;
+import com.szlaun.launtech.utils.PropertyUtils;
 import com.szlaun.launtech.utils.ResultMsg;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -185,11 +187,31 @@ public class LoginController {
             user.setPassword(password);
             int result = userService.updateByPrimaryKeySelective(user);
             if(result > 0){
-                return ResultMsg.getSuccess("密码修改成功！");
+                return ResultMsg.getSuccess();
             }
-            return ResultMsg.getError("修改密码失败！");
         }
-        return ResultMsg.getError("修改密码失败！");
+        return ResultMsg.getError();
+    }
+
+    /**
+     * 添加用户
+     *
+     * @param request
+     * @return
+     */
+    @ResponseBody
+    @Authority({"user:insert", "user:select"})
+    @RequestMapping("/addUser")
+    public ResultMsg addUser(HttpServletRequest request,@RequestParam(required = true) User user) {
+        User createUser = (User) request.getSession().getAttribute(Constant.SESSION_ACCOUNT_FLAGE);
+        if (createUser != null && user != null) {
+            PropertyUtils.addDefaultProperty(user, PropertyAddFlagEnum.INSERT,createUser.getId());
+            int result = userService.insert(user);
+            if(result > 0){
+                return ResultMsg.getSuccess();
+            }
+        }
+        return ResultMsg.getError();
     }
 
 }

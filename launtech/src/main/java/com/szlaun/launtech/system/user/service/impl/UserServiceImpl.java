@@ -21,6 +21,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public int insert(User user) {
+        user.setPassword(Base64Util.encode(user.getPassword()));
         return userMapper.insert(user);
     }
 
