@@ -1,6 +1,8 @@
 package com.szlaun.launtech.system.user.dto;
 
-public class UserRoleKey {
+import com.szlaun.launtech.utils.BaseEntity;
+
+public class UserRoleKey extends BaseEntity {
     private String userId;
 
     private String roleId;
