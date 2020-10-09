@@ -1,23 +1,19 @@
 package com.szlaun.launtech.system.user.controller;
 
-import com.alibaba.fastjson.JSONObject;
 import com.sap.conn.jco.JCoDestination;
 import com.sap.conn.jco.JCoFunction;
 import com.sap.conn.jco.JCoStructure;
 import com.sap.conn.jco.JCoTable;
 import com.szlaun.launtech.anno.Authority;
-import com.szlaun.launtech.enums.PropertyAddFlagEnum;
 import com.szlaun.launtech.system.sap.service.SAPConnectionPool;
 import com.szlaun.launtech.system.user.dto.User;
 import com.szlaun.launtech.system.user.service.UserService;
 import com.szlaun.launtech.utils.Constant;
-import com.szlaun.launtech.utils.PropertyUtils;
 import com.szlaun.launtech.utils.ResultMsg;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.thymeleaf.util.StringUtils;
 
@@ -30,7 +26,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 /**
- * @Description
+ * @Description 登录/用户
  * @Author lizhiming
  * @Date 2020/9/22 13:38
  * @Version V1.0
@@ -38,6 +34,7 @@ import java.net.URL;
 @Controller
 public class LoginController {
 
+    private static int count = 0;
     @Autowired
     private UserService userService;
 
@@ -158,6 +155,7 @@ public class LoginController {
     public ResultMsg login(HttpServletRequest request) {
         String account = request.getParameter("account");
         String password = request.getParameter("password");
+        System.out.println(count++);
         if (StringUtils.isEmpty(account) || StringUtils.isEmpty(password)) {
             return ResultMsg.getError("登录失败,账户或密码不能为空！");
         } else {
@@ -169,49 +167,6 @@ public class LoginController {
                 return ResultMsg.getError("登录失败,账户或密码错误！");
             }
         }
-    }
-
-
-    /**
-     * 修改密码
-     *
-     * @param request
-     * @return
-     */
-    @ResponseBody
-    @Authority({"user:update", "user:select"})
-    @RequestMapping("/updatePassword")
-    public ResultMsg updatePassword(HttpServletRequest request, @RequestParam(required = true) String password) {
-        User user = (User) request.getSession().getAttribute(Constant.SESSION_ACCOUNT_FLAGE);
-        if (!StringUtils.isEmpty(password) && user != null) {
-            user.setPassword(password);
-            int result = userService.updateByPrimaryKeySelective(user);
-            if(result > 0){
-                return ResultMsg.getSuccess();
-            }
-        }
-        return ResultMsg.getError();
-    }
-
-    /**
-     * 添加用户
-     *
-     * @param request
-     * @return
-     */
-    @ResponseBody
-    @Authority({"user:insert", "user:select"})
-    @RequestMapping("/addUser")
-    public ResultMsg addUser(HttpServletRequest request,@RequestParam(required = true) User user) {
-        User createUser = (User) request.getSession().getAttribute(Constant.SESSION_ACCOUNT_FLAGE);
-        if (createUser != null && user != null) {
-            PropertyUtils.addDefaultProperty(user, PropertyAddFlagEnum.INSERT,createUser.getId());
-            int result = userService.insert(user);
-            if(result > 0){
-                return ResultMsg.getSuccess();
-            }
-        }
-        return ResultMsg.getError();
     }
 
 }

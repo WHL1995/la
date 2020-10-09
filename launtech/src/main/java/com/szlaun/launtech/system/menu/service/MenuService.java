@@ -1,21 +1,24 @@
-package com.szlaun.launtech.system.menu.mapper;
+package com.szlaun.launtech.system.menu.service;
 
 import com.szlaun.launtech.system.menu.dto.Menu;
 
 import java.util.List;
 
-public interface MenuMapper {
-    int deleteByPrimaryKey(String id);
+/**
+ * @Description
+ * @Author lizhiming
+ * @Date 2020/10/9 10:28
+ * @Version V1.0
+ **/
+public interface MenuService {
 
     int insert(Menu record);
 
-    int insertSelective(Menu record);
+    int delete(String id);
+
+    int update(Menu record);
 
     Menu selectByPrimaryKey(String id);
-
-    int updateByPrimaryKeySelective(Menu record);
-
-    int updateByPrimaryKey(Menu record);
 
     /**
      * 查询用户所有的菜单

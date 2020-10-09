@@ -6,6 +6,7 @@ import com.szlaun.launtech.system.user.dto.User;
 import com.szlaun.launtech.system.user.mapper.UserMapper;
 import com.szlaun.launtech.system.user.service.UserService;
 import com.szlaun.launtech.utils.Base64Util;
+import com.szlaun.launtech.utils.Constant;
 import com.szlaun.launtech.utils.PropertyUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -51,5 +52,15 @@ public class UserServiceImpl implements UserService {
         user.setPassword(Base64Util.encode(user.getPassword()));
         PropertyUtils.addDefaultProperty(user, PropertyAddFlagEnum.UPDATE,user.getId());
         return userMapper.updateByPrimaryKeySelective(user);
+    }
+
+    @Override
+    public int deleteByPrimaryKey(String userId) {
+        User user = userMapper.selectByPrimaryKey(userId);
+        /* 没有用户或者超级管理员不能操作 */
+        if(user == null || Constant.SUPER_ADMIN_NAME.equals(user.getAccount())){
+            return 0;
+        }
+        return userMapper.deleteByPrimaryKey(userId);
     }
 }

@@ -17,4 +17,6 @@ public interface UserService {
     List<User> selectAll();
 
     int updateByPrimaryKeySelective(User user);
+
+    int deleteByPrimaryKey(String userId);
 }

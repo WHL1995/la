@@ -13,4 +13,7 @@ public final class Constant {
 
     /** 用户的公用session标记 */
     public static String SESSION_ACCOUNT_FLAGE = "user";
+
+    /** 超级管理员账户 */
+    public static String SUPER_ADMIN_NAME  = "admin";
 }
