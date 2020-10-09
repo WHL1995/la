@@ -4,7 +4,7 @@ import com.szlaun.launtech.anno.Authority;
 import com.szlaun.launtech.enums.PropertyAddFlagEnum;
 import com.szlaun.launtech.system.user.dto.User;
 import com.szlaun.launtech.system.user.dto.UserRoleKey;
-import com.szlaun.launtech.system.user.service.UserRoleService;
+import com.szlaun.launtech.system.user.mapper.UserRoleMapper;
 import com.szlaun.launtech.system.user.service.UserService;
 import com.szlaun.launtech.utils.Constant;
 import com.szlaun.launtech.utils.PropertyUtils;
@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.thymeleaf.util.StringUtils;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 /**
  * @Description
@@ -23,13 +24,28 @@ import javax.servlet.http.HttpServletRequest;
  * @Date 2020/10/9 10:12
  * @Version V1.0
  **/
+@RequestMapping("/user")
 public class UserController {
 
     @Autowired
-    private UserRoleService userRoleService;
+    private UserRoleMapper userRoleMapper;
 
     @Autowired
     private UserService userService;
+
+    /**
+     * 查询所有用户
+     *
+     * @param
+     * @return
+     */
+    @ResponseBody
+    @Authority("user:select")
+    @RequestMapping("/select")
+    public ResultMsg select(){
+        List<User> users = userService.selectAll();
+        return ResultMsg.getSuccess("操作成功",users);
+    }
 
     /**
      * 修改密码
@@ -60,8 +76,8 @@ public class UserController {
      */
     @ResponseBody
     @Authority({"user:insert", "user:select"})
-    @RequestMapping("/addUser")
-    public ResultMsg addUser(HttpServletRequest request,@RequestParam(required = true) User user) {
+    @RequestMapping("/insert")
+    public ResultMsg insert(HttpServletRequest request,@RequestParam(required = true) User user) {
         User createUser = (User) request.getSession().getAttribute(Constant.SESSION_ACCOUNT_FLAGE);
         if (createUser != null && user != null) {
             PropertyUtils.addDefaultProperty(user, PropertyAddFlagEnum.INSERT,createUser.getId());
@@ -81,8 +97,8 @@ public class UserController {
      */
     @ResponseBody
     @Authority({"user:delete", "user:select"})
-    @RequestMapping("/removerUser")
-    public ResultMsg removerUser(HttpServletRequest request,@RequestParam(required = true) String id) {
+    @RequestMapping("/delete")
+    public ResultMsg delete(HttpServletRequest request,@RequestParam(required = true) String id) {
         User user = (User) request.getSession().getAttribute(Constant.SESSION_ACCOUNT_FLAGE);
         if (!StringUtils.isEmpty(id) && user != null) {
             int result = userService.deleteByPrimaryKey(id);
@@ -94,7 +110,7 @@ public class UserController {
     }
 
     /**
-     * 设置用户角色
+     * 给用户设置角色
      *
      * @param request
      * @return
@@ -106,7 +122,7 @@ public class UserController {
         User user = (User) request.getSession().getAttribute(Constant.SESSION_ACCOUNT_FLAGE);
         if (userRoleKey != null && user != null) {
             userRoleKey.setCreateUser(user.getId());
-            int result = userRoleService.insertUR(userRoleKey);
+            int result = userRoleMapper.insertSelective(userRoleKey);
             if(result > 0){
                 return ResultMsg.getSuccess();
             }
@@ -115,7 +131,7 @@ public class UserController {
     }
 
     /**
-     * 移出用户角色
+     * 给用户移出角色
      *
      * @param request
      * @return
@@ -126,7 +142,7 @@ public class UserController {
     public ResultMsg removerUserRole(HttpServletRequest request,@RequestParam(required = true) UserRoleKey userRoleKey) {
         User user = (User) request.getSession().getAttribute(Constant.SESSION_ACCOUNT_FLAGE);
         if (userRoleKey != null && user != null) {
-            int result = userRoleService.deleteUR(userRoleKey);
+            int result = userRoleMapper.deleteByPrimaryKey(userRoleKey);
             if(result > 0){
                 return ResultMsg.getSuccess();
             }

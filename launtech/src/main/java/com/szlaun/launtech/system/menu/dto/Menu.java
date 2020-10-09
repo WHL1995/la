@@ -7,6 +7,8 @@ import java.util.Date;
 public class Menu extends BaseEntity {
     private String url;
 
+    private String permission;
+
     private Integer type;
 
     public String getUrl() {
@@ -23,5 +25,13 @@ public class Menu extends BaseEntity {
 
     public void setType(Integer type) {
         this.type = type;
+    }
+
+    public String getPermission() {
+        return permission;
+    }
+
+    public void setPermission(String permission) {
+        this.permission = permission;
     }
 }

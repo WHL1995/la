@@ -10,9 +10,10 @@
     <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
     <result column="create_user" property="createUser" jdbcType="VARCHAR" />
     <result column="update_user" property="updateUser" jdbcType="VARCHAR" />
+    <result column="permission" property="permission" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, url, type, remark, create_time, update_time, create_user, update_user
+    id, url, type, remark, create_time, update_time, create_user, update_user,permission
   </sql>
   <select id="selectMenuByUserId" resultMap="BaseResultMap" parameterType="java.lang.String">
     SELECT
@@ -105,10 +106,10 @@
   <insert id="insert" parameterType="com.szlaun.launtech.system.menu.dto.Menu" >
     insert into sys_menu (id, url, type, 
       remark, create_time, update_time, 
-      create_user, update_user)
+      create_user, update_user,permission)
     values (#{id,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER}, 
       #{remark,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
-      #{createUser,jdbcType=VARCHAR}, #{updateUser,jdbcType=VARCHAR})
+      #{createUser,jdbcType=VARCHAR}, #{updateUser,jdbcType=VARCHAR}, #{permission,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.szlaun.launtech.system.menu.dto.Menu" >
     insert into sys_menu
@@ -137,6 +138,9 @@
       <if test="updateUser != null" >
         update_user,
       </if>
+      <if test="permission != null" >
+        permission,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -162,6 +166,9 @@
       </if>
       <if test="updateUser != null" >
         #{updateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="permission != null" >
+        #{permission,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -189,6 +196,9 @@
       <if test="updateUser != null" >
         update_user = #{updateUser,jdbcType=VARCHAR},
       </if>
+      <if test="permission != null" >
+        permission = #{permission,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=VARCHAR}
   </update>
@@ -201,6 +211,7 @@
       update_time = #{updateTime,jdbcType=TIMESTAMP},
       create_user = #{createUser,jdbcType=VARCHAR},
       update_user = #{updateUser,jdbcType=VARCHAR}
+      permission = #{permission,jdbcType=VARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>
 </mapper>
