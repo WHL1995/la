@@ -1,6 +1,7 @@
 package com.szlaun.launtech.system.dict.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.szlaun.launtech.anno.Authority;
 import com.szlaun.launtech.system.dict.dto.DictType;
 import com.szlaun.launtech.system.dict.service.DictTypeService;
 import com.szlaun.launtech.utils.ResultMsg;
@@ -11,15 +12,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-@RequestMapping("/DictTypeController")
+@RequestMapping("/dictType")
 public class DictTypeController {
 
     @Autowired
     private DictTypeService dictTypeService;
 
-    @PostMapping("/DictTypeController_doAdd")
+    @PostMapping("/insert")
+    @Authority({"dictType:insert"})
     @ResponseBody
-    public ResultMsg doAdd(DictType dictType) {
+    public ResultMsg insert(DictType dictType) {
         int result = dictTypeService.insert(dictType);
         if (result > 0) {
             return ResultMsg.getSuccess();
@@ -27,11 +29,10 @@ public class DictTypeController {
         return ResultMsg.getError();
     }
 
-    @PostMapping("/DictTypeController_doEdit")
+    @PostMapping("/update")
+    @Authority({"dictType:update"})
     @ResponseBody
-    public ResultMsg doEdit(DictType dictType) {
-        JSONObject jsonObject = new JSONObject();
-
+    public ResultMsg update(DictType dictType) {
         int result = dictTypeService.update(dictType);
         if (result > 0) {
             return ResultMsg.getSuccess();
@@ -39,9 +40,10 @@ public class DictTypeController {
         return ResultMsg.getError();
     }
 
-    @PostMapping("/DictTypeController_doRemove")
+    @PostMapping("/delete")
+    @Authority({"dictType:delete"})
     @ResponseBody
-    public ResultMsg doRemove(String ids) {
+    public ResultMsg delete(String ids) {
         JSONObject jsonObject = new JSONObject();
 
         int result = 0;

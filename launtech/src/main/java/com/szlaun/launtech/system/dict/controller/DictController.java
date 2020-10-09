@@ -13,15 +13,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-@RequestMapping("/DictController")
+@RequestMapping("/dict")
 public class DictController {
 
     @Autowired
     private DictService dictService;
 
-    @PostMapping("/DictController_doAdd")
+    @PostMapping("/insert")
+    @Authority({"dict:insert"})
     @ResponseBody
-    public ResultMsg doAdd(Dict dict) {
+    public ResultMsg insert(Dict dict) {
         int result = dictService.insert(dict);
         if (result > 0) {
             return ResultMsg.getSuccess();
@@ -29,9 +30,10 @@ public class DictController {
         return ResultMsg.getError();
     }
 
-    @PostMapping("/DictController_doEdit")
+    @PostMapping("/update")
+    @Authority({"dict:update"})
     @ResponseBody
-    public ResultMsg edit(Dict dict) {
+    public ResultMsg update(Dict dict) {
         int result = dictService.update(dict);
         if (result > 0) {
             return ResultMsg.getSuccess();
@@ -39,8 +41,10 @@ public class DictController {
         return ResultMsg.getError();
     }
 
-    @RequestMapping("/DictController_doRemove")
-    public ResultMsg remove(String ids) {
+    @RequestMapping("/delete")
+    @Authority({"dict:delete"})
+    @ResponseBody
+    public ResultMsg delete(String ids) {
         int result = dictService.deleteByIds(ids);
         if (result > 0) {
             return ResultMsg.getSuccess();
