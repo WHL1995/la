@@ -4,8 +4,10 @@ import com.szlaun.launtech.utils.BaseEntity;
 
 import java.util.Date;
 
-public class Role  extends BaseEntity {
+public class Role extends BaseEntity {
     private String name;
+
+    private String[] menuIds;
 
     public String getName() {
         return name;
@@ -13,5 +15,13 @@ public class Role  extends BaseEntity {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String[] getMenuIds() {
+        return menuIds;
+    }
+
+    public void setMenuIds(String[] menuIds) {
+        this.menuIds = menuIds;
     }
 }
