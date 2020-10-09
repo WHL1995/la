@@ -33,4 +33,7 @@
       </if>
     </trim>
   </insert>
+  <select id="selectUserRoleByRoleId" parameterType="String" resultType="Integer">
+    select count(1) from sys_user_role where role_id =#{roleId}
+  </select>
 </mapper>
