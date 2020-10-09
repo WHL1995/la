@@ -1,10 +1,12 @@
 package com.szlaun.launtech.system.dict.service.impl;
 
+import com.szlaun.launtech.enums.PropertyAddFlagEnum;
 import com.szlaun.launtech.system.dict.dto.DictType;
 import com.szlaun.launtech.system.dict.mapper.DictMapper;
 import com.szlaun.launtech.system.dict.mapper.DictTypeMapper;
 import com.szlaun.launtech.system.dict.service.DictService;
 import com.szlaun.launtech.system.dict.service.DictTypeService;
+import com.szlaun.launtech.utils.PropertyUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,16 +23,14 @@ public class DictTypeServiceImpl implements DictTypeService {
 
     @Override
     public int insert(DictType dictType) {
-        String id = UUID.randomUUID().toString().replace("-", "");
-        dictType.setId(id);
-        dictType.setCreateTime(new Date());
+        PropertyUtils.addDefaultProperty(dictType, PropertyAddFlagEnum.INSERT, dictType.getCreateUser());
         int insert = dictTypeMapper.insert(dictType);
         return insert;
     }
 
     @Override
     public int update(DictType dictType) {
-        dictType.setUpdateTime(new Date());
+        PropertyUtils.addDefaultProperty(dictType, PropertyAddFlagEnum.UPDATE, dictType.getCreateUser());
         int i = dictTypeMapper.updateByPrimaryKey(dictType);
         return i;
     }

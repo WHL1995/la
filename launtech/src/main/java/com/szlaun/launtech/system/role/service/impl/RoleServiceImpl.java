@@ -28,6 +28,7 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     public int insert(Role role) {
+        PropertyUtils.addDefaultProperty(role, PropertyAddFlagEnum.INSERT, role.getCreateUser());
         roleMapper.insert(role);
         return insertRoleMenu(role);
     }
@@ -50,6 +51,7 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     public int update(Role role) {
+        PropertyUtils.addDefaultProperty(role, PropertyAddFlagEnum.UPDATE, role.getCreateUser());
         roleMapper.updateByPrimaryKey(role);
         roleMenuMapper.deleteByRoleId(role.getId());
         return insertRoleMenu(role);
