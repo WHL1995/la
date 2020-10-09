@@ -1,5 +1,6 @@
 package com.szlaun.launtech.system.role.controller;
 
+import com.szlaun.launtech.anno.Authority;
 import com.szlaun.launtech.system.role.dto.Role;
 import com.szlaun.launtech.system.role.service.RoleService;
 import com.szlaun.launtech.utils.ResultMsg;
@@ -9,15 +10,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-@RequestMapping("/RoleController")
+@RequestMapping("/role")
 public class RoleController {
 
     @Autowired
     private RoleService roleService;
 
-    @RequestMapping("/RoleController_doAdd")
+    @RequestMapping("/insert")
+    @Authority({"role:insert"})
     @ResponseBody
-    public ResultMsg doAdd(Role role) {
+    public ResultMsg insert(Role role) {
         int result = roleService.insert(role);
         if (result > 0) {
             return ResultMsg.getSuccess();
@@ -25,9 +27,10 @@ public class RoleController {
         return ResultMsg.getError();
     }
 
-    @RequestMapping("/RoleController_doEdit")
+    @RequestMapping("/update")
+    @Authority({"role:update"})
     @ResponseBody
-    public ResultMsg doEdit(Role role) {
+    public ResultMsg update(Role role) {
         int result = roleService.update(role);
         if (result > 0) {
             return ResultMsg.getSuccess();
@@ -35,8 +38,10 @@ public class RoleController {
         return ResultMsg.getError();
     }
 
-    @RequestMapping("/RoleController_doRomve")
-    public ResultMsg doRomve(String ids) {
+    @RequestMapping("/delete")
+    @Authority({"role:delete"})
+    @ResponseBody
+    public ResultMsg delete(String ids) {
         int result = 0;
         try {
             result = roleService.delete(ids);
