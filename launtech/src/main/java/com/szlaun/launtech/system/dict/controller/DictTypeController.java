@@ -1,6 +1,6 @@
 package com.szlaun.launtech.system.dict.controller;
 
-import com.alibaba.fastjson.JSONObject;
+
 import com.szlaun.launtech.anno.Authority;
 import com.szlaun.launtech.system.dict.dto.DictType;
 import com.szlaun.launtech.system.dict.service.DictTypeService;
@@ -56,8 +56,6 @@ public class DictTypeController {
     @Authority({"dictType:delete"})
     @ResponseBody
     public ResultMsg delete(@RequestParam(required = true) String ids) {
-        JSONObject jsonObject = new JSONObject();
-
         int result = 0;
         try {
             result = dictTypeService.deleteByIds(ids);
