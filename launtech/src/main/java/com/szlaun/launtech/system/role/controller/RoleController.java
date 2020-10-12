@@ -22,6 +22,9 @@ public class RoleController {
     @Autowired
     private RoleService roleService;
 
+    @RequestMapping("/select")
+    @Authority({"{role:select}"})
+    @ResponseBody
     public ResultMsg select() {
         List<Role> roles = roleService.selectAll();
         if (roles.size() > 0) {
