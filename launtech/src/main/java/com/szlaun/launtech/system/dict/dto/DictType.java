@@ -7,6 +7,16 @@ import com.szlaun.launtech.utils.BaseEntity;
 public class DictType extends BaseEntity {
     private String name;
 
+    private String categoryNo;
+
+    public String getCategoryNo() {
+        return categoryNo;
+    }
+
+    public void setCategoryNo(String categoryNo) {
+        this.categoryNo = categoryNo;
+    }
+
     public String getName() {
         return name;
     }

@@ -4,6 +4,7 @@
   <resultMap id="BaseResultMap" type="com.szlaun.launtech.system.dict.dto.DictType" >
     <id column="id" property="id" jdbcType="VARCHAR" />
     <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="category_no" property="categoryNo" jdbcType="VARCHAR" />
     <result column="remark" property="remark" jdbcType="VARCHAR" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
     <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
@@ -11,7 +12,7 @@
     <result column="update_user" property="updateUser" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, name, remark, create_time, update_time, create_user, update_user
+    id, name,category_no, remark, create_time, update_time, create_user, update_user
   </sql>
   <select id="selectAll" resultMap="BaseResultMap">
     select
@@ -37,10 +38,10 @@
   </delete>
   
   <insert id="insert" parameterType="com.szlaun.launtech.system.dict.dto.DictType" >
-    insert into sys_dict_type (id, name, remark, 
+    insert into sys_dict_type (id, name,category_no, remark,
       create_time, update_time, create_user, 
       update_user)
-    values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{categoryNo,jdbcType=VARCHAR},#{remark,jdbcType=VARCHAR},
       #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{createUser,jdbcType=VARCHAR}, 
       #{updateUser,jdbcType=VARCHAR})
   </insert>
@@ -52,6 +53,9 @@
       </if>
       <if test="name != null" >
         name,
+      </if>
+      <if test="categoryNo != null" >
+        category_no,
       </if>
       <if test="remark != null" >
         remark,
@@ -76,6 +80,9 @@
       <if test="name != null" >
         #{name,jdbcType=VARCHAR},
       </if>
+      <if test="categoryNo != null" >
+        #{categoryNo,jdbcType=VARCHAR},
+      </if>
       <if test="remark != null" >
         #{remark,jdbcType=VARCHAR},
       </if>
@@ -99,6 +106,9 @@
       <if test="name != null" >
         name = #{name,jdbcType=VARCHAR},
       </if>
+      <if test="categoryNo != null" >
+        category_no = #{categoryNo,jdbcType=VARCHAR},
+      </if>
       <if test="remark != null" >
         remark = #{remark,jdbcType=VARCHAR},
       </if>
@@ -120,6 +130,7 @@
   <update id="updateByPrimaryKey" parameterType="com.szlaun.launtech.system.dict.dto.DictType" >
     update sys_dict_type
     set name = #{name,jdbcType=VARCHAR},
+      category_no = #{categoryNo,jdbcType=VARCHAR},
       remark = #{remark,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       update_time = #{updateTime,jdbcType=TIMESTAMP},
