@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 @Controller
 @RequestMapping("/dictType")
@@ -22,6 +23,17 @@ public class DictTypeController {
 
     @Autowired
     private DictTypeService dictTypeService;
+
+    @RequestMapping("/select")
+    @Authority({"dictType:select"})
+    @ResponseBody
+    public ResultMsg select() {
+        List<DictType> dictTypes = dictTypeService.selectAll();
+        if(dictTypes.size()>0){
+            return ResultMsg.getSuccess("操作成功",dictTypes);
+        }
+        return ResultMsg.getError("查询数据为空");
+    }
 
     @PostMapping("/insert")
     @Authority({"dictType:insert"})

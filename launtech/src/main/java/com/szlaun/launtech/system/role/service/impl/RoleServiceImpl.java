@@ -70,4 +70,9 @@ public class RoleServiceImpl implements RoleService {
         return roleMapper.deleteByIds(split);
     }
 
+    @Override
+    public List<Role> selectAll() {
+        return roleMapper.selectAll();
+    }
+
 }

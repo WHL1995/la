@@ -2,6 +2,8 @@ package com.szlaun.launtech.system.dict.mapper;
 
 import com.szlaun.launtech.system.dict.dto.DictType;
 
+import java.util.List;
+
 public interface DictTypeMapper {
     int deleteByPrimaryKey(String id);
 
@@ -16,4 +18,7 @@ public interface DictTypeMapper {
     int updateByPrimaryKey(DictType record);
 
     int deleteByIds(String[] ids);
+
+    List<DictType> selectAll();
+
 }

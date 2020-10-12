@@ -2,6 +2,8 @@ package com.szlaun.launtech.system.role.mapper;
 
 import com.szlaun.launtech.system.role.dto.Role;
 
+import java.util.List;
+
 public interface RoleMapper {
     int deleteByPrimaryKey(String id);
 
@@ -16,4 +18,7 @@ public interface RoleMapper {
     int updateByPrimaryKey(Role record);
 
     int deleteByIds(String[] split);
+
+    List<Role> selectAll();
+
 }

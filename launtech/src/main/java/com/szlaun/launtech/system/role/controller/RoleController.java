@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 @Controller
 @RequestMapping("/role")
@@ -20,6 +21,14 @@ public class RoleController {
 
     @Autowired
     private RoleService roleService;
+
+    public ResultMsg select() {
+        List<Role> roles = roleService.selectAll();
+        if (roles.size() > 0) {
+            return ResultMsg.getSuccess("操作成功", roles);
+        }
+        return ResultMsg.getSuccess("查询数据为空");
+    }
 
     @RequestMapping("/insert")
     @Authority({"role:insert"})

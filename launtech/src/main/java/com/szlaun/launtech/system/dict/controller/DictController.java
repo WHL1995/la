@@ -1,7 +1,6 @@
 package com.szlaun.launtech.system.dict.controller;
 
 
-
 import com.szlaun.launtech.anno.Authority;
 import com.szlaun.launtech.system.dict.dto.Dict;
 import com.szlaun.launtech.system.dict.service.DictService;
@@ -16,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 @Controller
 @RequestMapping("/dict")
@@ -23,6 +23,17 @@ public class DictController {
 
     @Autowired
     private DictService dictService;
+
+    @RequestMapping("/select")
+    @Authority({"dict:select"})
+    @ResponseBody
+    public ResultMsg select() {
+        List<Dict> dict = dictService.selectAll();
+        if (dict.size()>0) {
+            return ResultMsg.getSuccess("操作成功", dict);
+        }
+        return ResultMsg.getError("查询数据为空");
+    }
 
     @PostMapping("/insert")
     @Authority({"dict:insert"})
