@@ -10,6 +10,7 @@ import com.szlaun.launtech.system.user.dto.User;
 import com.szlaun.launtech.system.user.service.UserService;
 import com.szlaun.launtech.utils.Constant;
 import com.szlaun.launtech.utils.ResultMsg;
+import com.szlaun.launtech.utils.VerificationCode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,13 +18,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.thymeleaf.util.StringUtils;
 
+import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.List;
 
 /**
  * @Description 登录/用户
@@ -169,4 +174,21 @@ public class LoginController {
         }
     }
 
+    /**
+     * 获取验证码及结果
+     *
+     * @return
+     */
+    @RequestMapping("/getCode")
+    public void getCode2(HttpServletResponse response) throws IOException{
+        List<Object> sss = new VerificationCode().createImage();
+        BufferedImage bi = (BufferedImage)sss.get(0);
+        //TODO 结果暂时存在响应头的code参数中
+        response.setHeader("code",sss.get(1).toString());
+        response.setHeader("Pragma", "no-cache");
+        response.setHeader("Cache-Control", "no-cache");
+        response.setDateHeader("Expires", 0);
+        response.setContentType("image/jpeg");
+        ImageIO.write(bi, "JPEG", response.getOutputStream());
+    }
 }
